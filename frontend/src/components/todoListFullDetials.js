@@ -1,16 +1,15 @@
-import React, { useContext, useState, useEffect, useRef } from 'react'
+import { useContext, useState, useEffect } from 'react'
 //  import {ReducerContext} from '../hooks/useReducer'
 import { BioContext } from '../contextProvider/contextapi'
 
 const FullDetials = ({ todo }) => {
 
-    const isFirstRender = useRef(true);
 
     const [status, setStatus] = useState(false);
     const [isEditable, setEditable] = useState(false);
     const [text, setText] = useState(`${todo.name}`);
 
-    const { myName, dispatch } = useContext(BioContext);
+    const { dispatch } = useContext(BioContext);
 
     // const {dispatch} = ReducerContext();
 
@@ -108,7 +107,7 @@ const FullDetials = ({ todo }) => {
 
 
 
-    const handleCheckBox =  async () => {
+    const handleCheckBox = async () => {
         const newStatus = !status;
         setStatus(newStatus);
 
@@ -146,19 +145,23 @@ const FullDetials = ({ todo }) => {
             {/* <p>{myName}</p> */}
 
             {isEditable ? (
-                <div className='edit-tooldiv'>
-                    <label>
+                <div className="edit-tooldiv">
+                    <label className="edit-label">
                         <input
-                            type='text'
-                            value={`${text}`}
+                            type="text"
+                            className="edit-input"
+                            value={text}
                             onChange={(e) => setText(e.target.value)}
                         />
-                        <button onClick={handleDone}>Done</button>
+                        <button className="done-btn" onClick={handleDone}>
+                            Done
+                        </button>
                     </label>
-
                 </div>
-            ) : (<p className='todoName'>{text}</p>)
-            }
+            ) : (
+                <p className="todoName">{text}</p>
+            )}
+
 
             <button className='edit-button' onClick={handleClickEdit}>Edit</button>
 

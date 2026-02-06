@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext} from 'react'
+import { useEffect, useContext} from 'react'
 import NewTodo from '../components/newTodoForm'
 import FullDetials from '../components/todoListFullDetials';
 import { BioContext } from '../contextProvider/contextapi';
@@ -38,7 +38,7 @@ const Home =  () => {
                     ))
                 }
             </div>
-
+ 
             <div className='newform-part'>
                 <NewTodo/>
             </div>

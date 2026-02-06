@@ -22,7 +22,7 @@ router.get('/:id', getSingleTodoById);
 router.delete('/:id', deleteById); 
 
 
-router.post('/addnew', addNewTodo);
+router.post('/addnew', addNewTodo); 
 
 
 router.patch('/:id', updateTodoById);

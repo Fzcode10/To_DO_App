@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import { createContext, useReducer } from 'react'
 
 export const BioContext = createContext();
 
@@ -10,7 +10,7 @@ export const reducer = (state, action) => {
             }
         case 'CREATE_TODO':
             return { ...state, 
-                todos: [ ...state.todos, action.payload]
+                todos: [ ...state.todos, action.payload] 
             }
         case 'DELETE_TODO': {
             return {

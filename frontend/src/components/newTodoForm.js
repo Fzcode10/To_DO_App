@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import  {useContext, useState} from 'react'
 import { BioContext } from '../contextProvider/contextapi';
 
 const NewTodo = () => {
@@ -6,7 +6,7 @@ const NewTodo = () => {
     const [text, setText] = useState("");
     
 
-    const {dispatch} = useContext(BioContext);
+    const {dispatch} = useContext(BioContext); 
 
     const handleClick = async (e) => {
         e.preventDefault();

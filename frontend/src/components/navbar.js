@@ -1,10 +1,9 @@
-import React, {useContext} from 'react'
+
 import { Link } from 'react-router-dom';
-import {BioContext} from '../contextProvider/contextapi'
+
 
 
 const Navbar = () => {
-    const {myName } = useContext(BioContext);
     return (
         <header>
             <div className='container'> 
