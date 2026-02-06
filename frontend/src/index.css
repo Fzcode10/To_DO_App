@@ -1,0 +1,210 @@
+header a {
+    text-decoration: none;
+}
+
+/* Main container */
+.container-home {
+  min-height: 100vh;              
+  display: flex;
+  flex-direction: column;         
+  background-color: #f7f7f7;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Todo list section */
+.todo-part {
+  flex: 1;                       
+  overflow-y: auto;               
+  padding-bottom: 80px;           
+}
+
+/* New todo form section */
+.newform-part {
+  position: sticky;               
+  bottom: 0;
+  background-color: #ffffff;
+  padding: 16px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+  border-top: 1px solid #ddd;
+}
+
+
+
+
+/* Navbar Part css */
+
+header {
+  width: 100%;
+  height: 64px;
+  background-color: #1f2937;          
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Inner container */
+header .container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+}
+
+/* Link reset */
+header .container a {
+  text-decoration: none;
+}
+
+/* Title */
+header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Hover effect */
+header h1:hover {
+  opacity: 0.85;
+}
+
+
+
+/* todo List Css  */
+
+/* Todo container */
+.todo-continer {
+  background-color: #ffffff;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Checkbox + status text */
+.todo-continer label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+/* Checkbox styling */
+.todo-continer input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Todo name */
+.todo-continer p {
+  margin: 6px 0 12px;
+  font-size: 16px;
+  color: #111827;
+  line-height: 1.4;
+}
+
+/* Buttons base */
+.todo-continer button {
+  padding: 6px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Edit button */
+.edit-button {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.edit-button:hover {
+  background-color: #1d4ed8;
+}
+
+/* Delete button */
+.delete-button {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.delete-button:hover {
+  background-color: #b91c1c;
+}
+
+/* Button click effect */
+.todo-continer button:active {
+  transform: scale(0.96);
+}
+
+/* Divider */
+.todo-continer hr {
+  margin-top: 14px;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+
+/* new Todo Add */
+
+.addnew-todo {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 14px 20px;
+  background-color: #ffffff;
+  border-top: 1px solid #e5e5e5;
+
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+/* Left side: span + input layered */
+.addnew-todo span {
+  display: inline-block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+/* Input field */
+.addnew-todo input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+/* Button aligned with input */
+.addnew-todo button {
+  height: 42px;
+  padding: 0 18px;
+  background-color: #4f46e5;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+
+

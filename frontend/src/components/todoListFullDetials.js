@@ -1,0 +1,176 @@
+import React, { useContext, useState, useEffect, useRef } from 'react'
+//  import {ReducerContext} from '../hooks/useReducer'
+import { BioContext } from '../contextProvider/contextapi'
+
+const FullDetials = ({ todo }) => {
+
+    const isFirstRender = useRef(true);
+
+    const [status, setStatus] = useState(false);
+    const [isEditable, setEditable] = useState(false);
+    const [text, setText] = useState(`${todo.name}`);
+
+    const { myName, dispatch } = useContext(BioContext);
+
+    // const {dispatch} = ReducerContext();
+
+
+    const handleClickEdit = () => {
+        setEditable(true);
+    }
+
+    const handleDone = async () => {
+        try {
+            const response = await fetch(`/todos/${todo._id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: text })
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to update todo");
+            }
+
+
+        } catch (error) {
+            console.error(error.message);
+        }
+        setEditable(false);
+
+    }
+
+
+    const handleClickDelete = async () => {
+        const response = await fetch(`/todos/${todo._id}`, {
+            method: 'DELETE'
+        });
+        if (response.ok) {
+            dispatch({ type: 'DELETE_TODO', payload: todo._id });
+        }
+    }
+
+    // const handleClickCheckbox = async () => {
+    //     const newStatus = !status;
+    //     setStatus(newStatus);
+
+    //     const updateTodo = { status: newStatus };
+
+    //     const response = await fetch(`/todos/${todo._id}`, {
+    //         method: 'PATCH',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(updateTodo)
+    //     });
+
+    //     const json = await response.json();
+
+    //     if (response.ok) {
+    //         setStatus(json.todo.status);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     if (isFirstRender.current) {
+    //         isFirstRender.current = false;
+    //         return;
+    //     }
+
+    //     const statusHandler = async () => {
+    //         try {
+    //             const response = await fetch(`/todos/${todo._id}`, {
+    //                 method: 'PATCH',
+    //                 headers: {
+    //                     'Content-Type': 'application/json'
+    //                 },
+    //                 body: JSON.stringify({ status })
+    //             });
+
+    //             if (!response.ok) {
+    //                 throw new Error("Failed to update data");
+    //             }
+    //         } catch (err) {
+    //             console.error(err.message);
+    //         }
+    //     };
+
+    //     statusHandler();
+    // }, [status, todo._id]);
+
+
+    useEffect(() => {
+        // console.log(todo.status);
+        setStatus(todo.status);
+    }, [todo.status]);
+
+
+
+
+    const handleCheckBox =  async () => {
+        const newStatus = !status;
+        setStatus(newStatus);
+
+
+        try {
+            const response = await fetch(`/todos/${todo._id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: newStatus })
+            });
+
+            if (!response.ok) {
+                throw new Error('Update failed');
+            }
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
+    return (
+        <div className='todo-continer'>
+
+            {console.log(todo._id)}
+
+            <label>
+                <input
+                    type='checkbox'
+                    name='status'
+                    checked={status}
+                    onChange={handleCheckBox}
+                />
+                {(!status) ? "Do_Fast" : "complated"}
+            </label>
+
+            {/* <p>{myName}</p> */}
+
+            {isEditable ? (
+                <div className='edit-tooldiv'>
+                    <label>
+                        <input
+                            type='text'
+                            value={`${text}`}
+                            onChange={(e) => setText(e.target.value)}
+                        />
+                        <button onClick={handleDone}>Done</button>
+                    </label>
+
+                </div>
+            ) : (<p className='todoName'>{text}</p>)
+            }
+
+            <button className='edit-button' onClick={handleClickEdit}>Edit</button>
+
+
+            <button className='delete-button' onClick={handleClickDelete}>Delete</button>
+
+            <hr></hr>
+
+            {/* {console.log(todo)} */}
+
+        </div>
+    )
+}
+
+export default FullDetials 
