@@ -20,7 +20,7 @@ const FullDetials = ({ todo }) => {
 
     const handleDone = async () => {
         try {
-            const response = await fetch(`/todos/${todo._id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/todos/${todo._id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ const FullDetials = ({ todo }) => {
 
 
     const handleClickDelete = async () => {
-        const response = await fetch(`/todos/${todo._id}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/todos/${todo._id}`, {
             method: 'DELETE'
         });
         if (response.ok) {
@@ -79,7 +79,7 @@ const FullDetials = ({ todo }) => {
 
     //     const statusHandler = async () => {
     //         try {
-    //             const response = await fetch(`/todos/${todo._id}`, {
+    //             const response = await fetch(`${process.env.REACT_APP_API_URL}/todos/${todo._id}`, {
     //                 method: 'PATCH',
     //                 headers: {
     //                     'Content-Type': 'application/json'
@@ -113,7 +113,7 @@ const FullDetials = ({ todo }) => {
 
 
         try {
-            const response = await fetch(`/todos/${todo._id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/todos/${todo._id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus })
@@ -141,7 +141,7 @@ const FullDetials = ({ todo }) => {
                 />
                 {(!status) ? "Do_Fast" : "complated"}
             </label>
-
+ 
             {/* <p>{myName}</p> */}
 
             {isEditable ? (

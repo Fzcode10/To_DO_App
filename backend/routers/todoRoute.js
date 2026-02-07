@@ -5,7 +5,7 @@ const {getAlltoods, deleteById, addNewTodo, updateTodoById, getSingleTodoById } 
 
 // router.get('', (req, res) => {
 //     res.status(200).json({
-//         msg: `A`
+//         msg: `A` 
 //     })
 // }) ; 
  

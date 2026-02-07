@@ -107,7 +107,7 @@ exports.updateTodoById = async (req, res) => {
 
     // console.log(todo); 
     // console.log(req.body);
-    try {
+    try { 
         const updatedTodo = await TodoModel.findByIdAndUpdate(
             _id,
             { $set: req.body },

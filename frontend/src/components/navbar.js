@@ -10,7 +10,7 @@ const Navbar = () => {
 
             <Link>
              <h1>I will add navbuttons later after adding the new functions.</h1>
-              
+      
             </Link>
             </div>
 

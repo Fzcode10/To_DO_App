@@ -14,7 +14,7 @@ const Home =  () => {
 
     useEffect(() => { 
         const fetchTodos = async () => {
-            const responce = await fetch('/todos');
+            const responce = await fetch(`${process.env.REACT_APP_API_URL}/todos`);
             const json = await responce.json();
             if(responce.ok){
                 // console.log(json); 

@@ -7,7 +7,7 @@ import {Bioprovider} from './contextProvider/contextapi'
 
 function App() {
   return ( 
-    <>
+    <> 
     <Bioprovider>
      <BrowserRouter>
       <Navbar/>
