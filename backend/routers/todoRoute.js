@@ -7,7 +7,7 @@ const {getAlltoods, deleteById, addNewTodo, updateTodoById, getSingleTodoById } 
 //     res.status(200).json({
 //         msg: `A`
 //     })
-// }) ;
+// }) ; 
  
 router.get('', getAlltoods) ;
  

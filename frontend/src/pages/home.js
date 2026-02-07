@@ -22,10 +22,10 @@ const Home =  () => {
 
                 dispatch({type:'SET_TODO', payload: json.todo});
             }
-        }
+        } 
         fetchTodos();
     }, [dispatch]) 
-
+ 
     return ( 
         <>
           <div className='container-home'>

@@ -33,7 +33,7 @@ exports.getSingleTodoById = async (req, res) => {
         msg: `Is one is that todo`,
         todo: todo
     })
-}
+} 
  
 exports.addNewTodo = async (req, res) => {
 
