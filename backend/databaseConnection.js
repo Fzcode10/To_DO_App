@@ -9,7 +9,7 @@ const DataBaseConnection = () => {
 
     mongoose.connect(Database_url); 
 
-    const Db = mongoose.connection; 
+    const Db = mongoose.connection;  
     
     // Connection status with event handler (I have to perform api call so i prefer event handler at place of try catch block)
     Db.on("error", console.error.bind("Databse connection failed"))
