@@ -14,7 +14,7 @@ const NewTodo = () => {
         const newTodo = { name: text, status: false};
         // console.log(newTodo);
 
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/todos/addnew`, {
+        const response = await fetch(`/api/todos/addnew`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
