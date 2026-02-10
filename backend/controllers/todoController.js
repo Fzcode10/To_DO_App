@@ -50,7 +50,7 @@ exports.addNewTodo = async (req, res) => {
     if (missingBodyPart.length > 0) {
         return res.status(404).json({
             error: `Please fill all mindatery fileds properly`,
-            missingBodyPart
+            missing: missingBodyPart
         })
     }
 
