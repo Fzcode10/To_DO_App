@@ -9,7 +9,7 @@ const NewTodo = () => {
     const [success, setSuccess] = useState(false);
 
     const {dispatch} = useContext(BioContext); 
-    const BACKEND_URL = process.env.BACKEND_URL;
+    // const BACKEND_URL = process.env.BACKEND_URL;
 
     const handleClick = async (e) => {
         e.preventDefault();
@@ -18,7 +18,7 @@ const NewTodo = () => {
         // console.log(newTodo);
         // console.log(missingPart);
 
-        const response = await fetch(`${BACKEND_URL}/api/todos/addnew`, {
+        const response = await fetch(`https://todoapp-production-5580.up.railway.app/api/todos/addnew`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

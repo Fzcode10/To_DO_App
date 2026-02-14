@@ -11,7 +11,7 @@ const SearchBar = () => {
 
     const { dispatch } = useContext(BioContext);
 
-    const BACKEND_URL = process.env.BACKEND_URL;
+    // const BACKEND_URL = process.env.BACKEND_URL;
 
     const handleClick = async (e) => {
         e.preventDefault();
@@ -21,7 +21,7 @@ const SearchBar = () => {
                 setError("Invaild Id");
                 return
             }
-            const responce = await fetch(`${BACKEND_URL}/api/todos/${todoId}`);
+            const responce = await fetch(`https://todoapp-production-5580.up.railway.app/api/todos/${todoId}`);
 
             if (!responce.ok) {
                 setError("Data not found");
@@ -42,7 +42,7 @@ const SearchBar = () => {
 
     useEffect(() => {
         const fetchIds = async () => {
-            const responce = await fetch(`${BACKEND_URL}/api/todos`, {
+            const responce = await fetch(`https://todoapp-production-5580.up.railway.app/api/todos`, {
                 method: 'get'
             })
 

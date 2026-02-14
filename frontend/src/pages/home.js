@@ -14,7 +14,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const BACKEND_URL = process.env.BACKEND_URL;
+    // const BACKEND_URL = process.env.BACKEND_URL;
 
     useEffect(() => {
 
@@ -23,7 +23,7 @@ const Home = () => {
             setError(null);
 
             try {
-                const response = await fetch(`${BACKEND_URL}/api/todos`);
+                const response = await fetch(`https://todoapp-production-5580.up.railway.app/api/todos`);
 
                 if (!response.ok) {
                     setError("Faild to fetch data");
