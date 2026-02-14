@@ -2,39 +2,58 @@ const TodoModel = require('../models/todo');
 
 
 exports.getAlltoods = async (req, res) => {
-    
-    const todos = await TodoModel.find();
 
-    if (!todos) {
+    try {
+        const todos = await TodoModel.find();
+
+        if (!todos) {
+            return res.status(200).json({
+                msg: `There is no any todo in list`
+            })
+        }
+
         return res.status(200).json({
-            msg: `There is no any todo in list` 
+            // msg: 'All todos',
+            todo: todos
+        })
+
+    } catch (err) {
+        return res.status(404).json({
+            error: err.message
         })
     }
 
-    return res.status(200).json({
-        // msg: 'All todos',
-        todo: todos
-    })
-} 
+}
 
 exports.getSingleTodoById = async (req, res) => {
     const _id = req.params.id;
 
-    const todo = await TodoModel.findById(_id);
-    console.log(todo); 
+    try {
 
-    if(!todo) {
+        const todo = await TodoModel.findById(_id);
+
+        if (!todo) {
+            return res.status(404).json({
+                msg: `There is no todo`,
+                error: 'No todo available'
+            })
+        }
+
+        return res.status(200).json({
+            msg: `Is one is that todo`,
+            todo: todo
+        })
+        
+    } catch (err) {
+        // console.log(err.message);
+        // err.message="Invaild Id"
         return res.status(404).json({
-            msg:`There is no todo`
+            error: "Invalid ID",
         })
     }
 
-    return res.status(200).json({
-        msg: `Is one is that todo`,
-        todo: todo
-    })
-} 
- 
+}
+
 exports.addNewTodo = async (req, res) => {
 
     const { name, status } = req.body;
@@ -49,7 +68,7 @@ exports.addNewTodo = async (req, res) => {
 
     if (missingBodyPart.length > 0) {
         return res.status(404).json({
-            error: `Please fill all mindatery fileds properly with all data`,
+            error: `Please fill text sesion first`,
             missing: missingBodyPart
         })
     }
@@ -61,7 +80,8 @@ exports.addNewTodo = async (req, res) => {
         console.log(status);
         return res.status(200).json({
             todo: todo,
-            msg: `Success`
+            msg: `Success`,
+            missingBodyPart
         })
     } catch (error) {
         return res.status(404).json({
@@ -96,7 +116,7 @@ exports.deleteById = async (req, res) => {
 exports.updateTodoById = async (req, res) => {
     const _id = req.params.id;
     // console.log(_id);
- 
+
     const todo = await TodoModel.findById(_id);
 
     if (!todo) {
@@ -107,7 +127,7 @@ exports.updateTodoById = async (req, res) => {
 
     // console.log(todo); 
     // console.log(req.body);
-    try { 
+    try {
         const updatedTodo = await TodoModel.findByIdAndUpdate(
             _id,
             { $set: req.body },
@@ -117,14 +137,14 @@ exports.updateTodoById = async (req, res) => {
             }
         )
         return res.status(200).json({
-        msg: `Todo updated successfully`,
-        updated_todo: updatedTodo
-    }) 
+            msg: `Todo updated successfully`,
+            updated_todo: updatedTodo
+        })
     } catch (error) {
         return res.status(404).json({
             error: error.message
         })
     }
 
-    
+
 } 

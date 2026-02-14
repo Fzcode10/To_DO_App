@@ -1,6 +1,7 @@
 // Import express
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 dotenv.config(); 
 
@@ -12,6 +13,12 @@ app.use(express.json());
 
 // Connect DB
 DataBaseConnection();
+
+const allowedOrigin = process.env.FRONTEND_URL || "*"; // allowed all url before FRONTEND_URL enviroment setup
+app.use(cors({
+  origin: allowedOrigin, 
+  credentials: true
+}));
 
 // Request logger
 app.use((req, res, next) => {
@@ -36,7 +43,7 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use('/todos', todoRoutes);
+app.use('/api/todos', todoRoutes);
  
 // PORT
 const PORT = process.env.PORT || 4000;

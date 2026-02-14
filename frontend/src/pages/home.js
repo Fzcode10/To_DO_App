@@ -1,51 +1,104 @@
-import { useEffect, useContext} from 'react'
+import { useEffect, useContext, useState } from 'react'
 import NewTodo from '../components/newTodoForm'
 import FullDetials from '../components/todoListFullDetials';
 import { BioContext } from '../contextProvider/contextapi';
 
 
 
- 
-const Home =  () => {
+
+const Home = () => {
 
     // const [todos, setTodos] = useState([]);
-    
-    const {todos , dispatch} = useContext(BioContext)
 
-    useEffect(() => { 
+    const { todos, dispatch, notification } = useContext(BioContext)
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+
         const fetchTodos = async () => {
-            const responce = await fetch(`/api/todos`);
-            const json = await responce.json();
-            if(responce.ok){
-                // console.log(json); 
-                // setTodos(json.todo);
+            setLoading(true);
+            setError(null);
 
-                dispatch({type:'SET_TODO', payload: json.todo});
-            }
-        } 
-        fetchTodos();
-    }, [dispatch]) 
- 
-    return ( 
-        <>
-          <div className='container-home'>
+            try {
+                const response = await fetch("/api/todos");
 
-            <div className='todo-part'>
-
-                {
-                    todos && todos.map((todo) =>(
-                        <FullDetials key={todo._id} todo={todo}/>
-                    ))
+                if (!response.ok) {
+                    setError("Faild to fetch data");
+                    throw new Error("Failed to fetch todos");
                 }
+
+                const json = await response.json();
+
+                dispatch({ type: "SET_TODO", payload: json.todo });
+
+            } catch (err) {
+                console.error(err.message);
+                if (!navigator.onLine) {
+                    setError("No internet connection ");
+                } else {
+                    setError(err.message);
+                }
+            } finally {
+                setLoading(false);
+            }
+
+
+
+        }
+        fetchTodos();
+    }, [dispatch])
+
+      useEffect(() => {
+        // console.log(notification);
+        if(notification){
+            const timer = setTimeout(() => {
+                dispatch({type: 'NOTIFICATION_CLEAR'})
+            }, 1000);
+
+            return () => clearTimeout(timer);
+        }
+
+    }, [notification, dispatch])
+
+
+    if(loading){
+        return (
+            <div className='loading'>
+                <h1>Loading...</h1>
             </div>
- 
-            <div className='newform-part'>
-                <NewTodo/>
+        )
+    }
+
+    if(error){
+        return (
+            <div className='fullpageerror'>
+                <h1>{error}</h1>
             </div>
+        )
+    }
 
+    return (
+        <>
+            <div className='container-home'>
 
+             
+                <div className='todo-part'>
 
-          </div>
+                    {
+                        todos && todos.map((todo) => (
+                            <FullDetials key={todo._id} todo={todo} />
+                        ))
+                    }
+                </div>
+                    {notification && <div className='deleted'>{notification}</div>}
+                <div className='newform-part'>
+                    <NewTodo />
+                </div>
+
+                {error && <div> {error} </div>}
+
+            </div>
         </>
     )
 }

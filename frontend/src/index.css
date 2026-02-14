@@ -252,3 +252,173 @@ header h1:hover {
 .done-btn:hover {
   opacity: 0.9;
 }
+
+/* Base alert style */
+.alert {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+/* Error message */
+.alert.error {
+  background-color: #fdecea;
+  color: #b02a37;
+  border-left: 4px solid #dc3545;
+}
+
+/* Success message */
+.alert.success {
+  background-color: #e6f9f0;
+  color: #1e7e34;
+  border-left: 4px solid #28a745;
+}
+
+/* Input error state */
+input.alert.error {
+  border: 1px solid #dc3545;
+  background-color: #fff5f5;
+}
+
+
+.loading,
+.fullpageerror {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: system-ui, sans-serif;
+  text-align: center;
+}
+
+/* Loading Page */
+.loading {
+  background-color: #f8f9fa;
+}
+
+.loading h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #4a90e2;
+  animation: pulse 1.2s infinite;
+}
+
+/* Full Page Error */
+.fullpageerror {
+  background-color: #fff5f5;
+}
+
+.fullpageerror h1 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #dc3545;
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+
+.edited,.taskDone,
+.deleted {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 180px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  animation: slideIn 0.3s ease forwards;
+}
+
+/* Green for edited */
+.edited, .taskDone {
+  background-color: #2ecc71;
+}
+
+/* Red for deleted */
+.deleted {
+  background-color: #e74c3c;
+}
+
+
+
+/* Slide animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.searchbar {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Full width span in single line */
+.search-text {
+  width: 100%;
+  font-size: 15px;
+  color: #555;
+  white-space: nowrap;        /* forces single line */
+  overflow: hidden;
+  text-overflow: ellipsis;    /* adds ... if too long */
+}
+
+/* Input + Button in one line */
+.search-row {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+/* Input takes remaining space */
+.search-row input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.search-row input:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+/* Button */
+.search-row button {
+  padding: 9px 18px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
+  transition: 0.2s ease;
+}
+
+.search-row button:hover {
+  background-color: #357abd;
+}

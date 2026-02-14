@@ -16,7 +16,23 @@ export const reducer = (state, action) => {
             return {
                 todos: state.todos.filter(
                     todo => todo._id !== action.payload
-                )
+                ),
+                notification: 'Deleted'
+            }
+        }
+        case 'NOTIFICATION_CLEAR': {
+            return {
+                ...state,
+                notification: null
+            }
+        }
+        case 'SINGLE_TODO' : {
+            return {
+                // todos: state.todos.filter(
+                //     todo => todo.id === action.payload 
+                // )
+                ...state,
+                todos:[action.payload]
             }
         }
         default:
@@ -28,12 +44,12 @@ export const reducer = (state, action) => {
 export const Bioprovider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, {
-        todos: null
+        todos: null, notification: null
     });
 
-    const myName = "Faiz";
+    // const myName = "Faiz";
 
-    return <BioContext.Provider value={{ ...state, dispatch, myName }}>
+    return <BioContext.Provider value={{ ...state, dispatch }}>
         {children}
     </BioContext.Provider>
 }

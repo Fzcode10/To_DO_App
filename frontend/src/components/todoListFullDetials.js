@@ -8,6 +8,10 @@ const FullDetials = ({ todo }) => {
     const [status, setStatus] = useState(false);
     const [isEditable, setEditable] = useState(false);
     const [text, setText] = useState(`${todo.name}`);
+    const [taskDone, setTaskDone] = useState(false);
+    
+    // const [deleted, setDeleted] = useState(false);
+    const [edited, setEdited] = useState(false);
 
     const { dispatch } = useContext(BioContext);
 
@@ -20,6 +24,7 @@ const FullDetials = ({ todo }) => {
 
     const handleDone = async () => {
         try {
+            setEdited(false);
             const response = await fetch(`/api/todos/${todo._id}`, {
                 method: 'PATCH',
                 headers: {
@@ -30,6 +35,8 @@ const FullDetials = ({ todo }) => {
 
             if (!response.ok) {
                 throw new Error("Failed to update todo");
+            }else{
+                setEdited(true);
             }
 
 
@@ -40,14 +47,22 @@ const FullDetials = ({ todo }) => {
 
     }
 
+    // const onDeletedSuccess = () => {
+    //     setDeleted(true);
+    // } 
 
     const handleClickDelete = async () => {
+        
+        
         const response = await fetch(`/api/todos/${todo._id}`, {
             method: 'DELETE'
         });
         if (response.ok) {
+            // setDeleted(true);
             dispatch({ type: 'DELETE_TODO', payload: todo._id });
+            // onDeletedSuccess();
         }
+        // onDeletedSuccess();
     }
 
     // const handleClickCheckbox = async () => {
@@ -104,7 +119,35 @@ const FullDetials = ({ todo }) => {
         setStatus(todo.status);
     }, [todo.status]);
 
+    useEffect(() => {
+        // console.log(`deleted : ${deleted}`);
+        // console.log(edited);
+        // if(deleted){
+        //     const timer = setTimeout(() => {
+        //         setDeleted(false);
+        //     }, 1000);
 
+        //     return () => clearTimeout(timer);
+        // }
+
+        if(edited){
+            const timer = setTimeout( () => {
+                setEdited(false);
+            }, 1000);
+
+            return () => clearTimeout(timer);
+        }
+
+        if(taskDone){
+            // console.log(taskDone);
+            const timer = setTimeout(() => {
+                setTaskDone(false);
+            }, 2000)
+
+            return () => clearTimeout(timer);
+        }
+
+    }, [ edited, taskDone])
 
 
     const handleCheckBox = async () => {
@@ -121,6 +164,8 @@ const FullDetials = ({ todo }) => {
 
             if (!response.ok) {
                 throw new Error('Update failed');
+            }else{
+                setTaskDone(true);
             }
         } catch (err) {
             console.error(err.message);
@@ -167,6 +212,9 @@ const FullDetials = ({ todo }) => {
 
 
             <button className='delete-button' onClick={handleClickDelete}>Delete</button>
+
+            {edited && <div className='edited'>Edited</div>}
+            {taskDone && <div className='taskDone'>Task Completed!</div>}
 
             <hr></hr>
 
