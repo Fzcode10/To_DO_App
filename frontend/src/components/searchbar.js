@@ -11,15 +11,17 @@ const SearchBar = () => {
 
     const { dispatch } = useContext(BioContext);
 
+    const BACKEND_URL = process.env.BACKEND_URL;
+
     const handleClick = async (e) => {
         e.preventDefault();
 
         try {
-            if (todoId == "") {
+            if (todoId === "") {
                 setError("Invaild Id");
                 return
             }
-            const responce = await fetch(`/api/todos/${todoId}`);
+            const responce = await fetch(`${BACKEND_URL}/api/todos/${todoId}`);
 
             if (!responce.ok) {
                 setError("Data not found");
@@ -40,7 +42,7 @@ const SearchBar = () => {
 
     useEffect(() => {
         const fetchIds = async () => {
-            const responce = await fetch(`/api/todos`, {
+            const responce = await fetch(`${BACKEND_URL}/api/todos`, {
                 method: 'get'
             })
 
@@ -77,7 +79,7 @@ const SearchBar = () => {
         <>
             <div className='searchbar'>
                 <span className='search-text'>
-                    Search Todo with their id's "Check with default id's" like - {defaultId} first todo's id
+                    Search Todo with their id's "Check with default id's" like - <b>{defaultId} </b> first todo's id
                 </span>
 
                 <div className='search-row'>

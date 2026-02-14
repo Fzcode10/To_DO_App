@@ -15,6 +15,8 @@ const FullDetials = ({ todo }) => {
 
     const { dispatch } = useContext(BioContext);
 
+    const BACKEND_URL = process.env.BACKEND_URL;
+
     // const {dispatch} = ReducerContext();
 
 
@@ -25,7 +27,7 @@ const FullDetials = ({ todo }) => {
     const handleDone = async () => {
         try {
             setEdited(false);
-            const response = await fetch(`/api/todos/${todo._id}`, {
+            const response = await fetch(`${BACKEND_URL}/api/todos/${todo._id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -54,7 +56,7 @@ const FullDetials = ({ todo }) => {
     const handleClickDelete = async () => {
         
         
-        const response = await fetch(`/api/todos/${todo._id}`, {
+        const response = await fetch(`${BACKEND_URL}/api/todos/${todo._id}`, {
             method: 'DELETE'
         });
         if (response.ok) {
@@ -156,7 +158,7 @@ const FullDetials = ({ todo }) => {
 
 
         try {
-            const response = await fetch(`/api/todos/${todo._id}`, {
+            const response = await fetch(`${BACKEND_URL}/api/todos/${todo._id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus })

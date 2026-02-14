@@ -14,6 +14,8 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const BACKEND_URL = process.env.BACKEND_URL;
+
     useEffect(() => {
 
         const fetchTodos = async () => {
@@ -21,7 +23,7 @@ const Home = () => {
             setError(null);
 
             try {
-                const response = await fetch("/api/todos");
+                const response = await fetch(`${BACKEND_URL}/api/todos`);
 
                 if (!response.ok) {
                     setError("Faild to fetch data");
