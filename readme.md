@@ -88,4 +88,4 @@ With the help of the backend, the database is updated accordingly.
 
 
 ## Deployed Link With versel(Latest)
-🔗 https://to-do-app-git-main-faiz-ahamads-projects.vercel.app/
+🔗 https://to-do-app-theta-blush.vercel.app/
