@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const {getAlltoods, deleteById, addNewTodo, updateTodoById, getSingleTodoById } = require('../controllers/todoController');
+const {getAlltoods, deleteById, addNewTodo, updateTodoById, getSingleTodoById, getSingleTodoByName } = require('../controllers/todoController');
 
 // router.get('', (req, res) => {
 //     res.status(200).json({
@@ -27,7 +27,7 @@ router.post('/addnew', addNewTodo);
 
 router.patch('/:id', updateTodoById);
 
-
+router.post('/singletodo', getSingleTodoByName);
 
 
 module.exports = router;

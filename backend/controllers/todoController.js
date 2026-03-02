@@ -148,3 +148,34 @@ exports.updateTodoById = async (req, res) => {
 
 
 } 
+
+
+// Find totdo with name or title
+
+exports.getSingleTodoByName = async (req, res) => {
+    const todoTitle = req.body.todo;
+
+    console.log(todoTitle);
+
+    try {
+
+        const todo = await TodoModel.findOne({name : todoTitle});
+
+        // console.log(todo);
+
+        if (!todo) {
+            throw Error("Check todo ones (Like space, uppercase and lowercase etc)");
+        }
+
+        return res.status(200).json({
+            todo: todo
+        })
+        
+    } catch (err) {
+        // console.log(err.message);
+        // err.message="Invaild Id"
+        return res.status(404).json({
+            error: err.message,
+        })
+    }
+}

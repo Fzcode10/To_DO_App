@@ -8,6 +8,7 @@ const SearchBar = () => {
     const [error, setError] = useState(null);
     const [defaultId, setDefaultId] = useState("");
     const [success, setSuccess] = useState(false);
+    const [todo, setTodo] = useState("");
 
     const { dispatch } = useContext(BioContext);
 
@@ -40,6 +41,17 @@ const SearchBar = () => {
         }
     };
 
+    const hanldleClickTodoSearch = async (e) => {
+        e.preventDefault();
+
+        try{
+
+        }catch (error) {
+            setError(error.message);
+        }finally{
+            setTodo("");
+        }
+    }
     useEffect(() => {
         const fetchIds = async () => {
             const responce = await fetch(`https://todoapp-production-5580.up.railway.app/api/todos`, {
@@ -78,6 +90,7 @@ const SearchBar = () => {
     return (
         <>
             <div className='searchbar'>
+                <div className='with-id'>
                 <span className='search-text'>
                     Search Todo with their id's "Check with default id's" like - <b>{defaultId} </b> first todo's id
                 </span>
@@ -91,6 +104,23 @@ const SearchBar = () => {
                         onChange={(e) => setTodoId(e.target.value)}
                     />
                     <button onClick={handleClick}>Enter</button>
+                </div>
+                </div>
+
+                <div className='with-name'>
+                <span className='search-text'>
+                    Search Todo with their name
+                </span>
+
+                <div className='search-row'>
+                    <input
+                    type="text"
+                    placeholder="Enter Todo"
+                    value={todo}
+                    onChange= {(e) => setTodo(e.target.value)}
+                    />
+                    <button onClick={hanldleClickTodoSearch}>Enter</button>
+                </div>
                 </div>
 
                 {error && <div className='alert error'>{error} !!</div>}
