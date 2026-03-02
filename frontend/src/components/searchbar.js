@@ -1,4 +1,4 @@
-import  { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { BioContext } from '../contextProvider/contextapi';
 
 
@@ -44,11 +44,42 @@ const SearchBar = () => {
     const hanldleClickTodoSearch = async (e) => {
         e.preventDefault();
 
-        try{
+        try {
+            if (!todo) {
+                setError("Invaild todo");
+                return
+            }
 
-        }catch (error) {
+
+            console.log(JSON.stringify({ "name": `${todo}` }));
+
+            const responce = await fetch(
+                "https://todoapp-production-5580.up.railway.app/api/todos/singletodo/byname",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ "name": `${todo}` }),
+                }
+            );
+
+            console.log(responce);
+            
+            if (!responce.ok) {
+                // setError("Data not found");
+                setTodo("");
+                throw Error("Data not found");
+            }
+            
+            const json = await responce.json();
+            console.log(json);
+            dispatch({ type: 'SINGLE_TODO', payload: json.todo });
+            setSuccess(true);
+        } catch (error) {
             setError(error.message);
-        }finally{
+            console.log(error);
+        } finally {
             setTodo("");
         }
     }
@@ -91,36 +122,36 @@ const SearchBar = () => {
         <>
             <div className='searchbar'>
                 <div className='with-id'>
-                <span className='search-text'>
-                    Search Todo with their id's "Check with default id's" like - <b>{defaultId} </b> first todo's id
-                </span>
+                    <span className='search-text'>
+                        Search Todo with their id's "Check with default id's" like - <b>{defaultId} </b> first todo's id
+                    </span>
 
-                <div className='search-row'>
-                    <input
-                        type="text"
-                        placeholder="Enter todo id"
-                        value={todoId}
-                        maxLength={40}
-                        onChange={(e) => setTodoId(e.target.value)}
-                    />
-                    <button onClick={handleClick}>Enter</button>
-                </div>
+                    <div className='search-row'>
+                        <input
+                            type="text"
+                            placeholder="Enter todo id"
+                            value={todoId}
+                            maxLength={40}
+                            onChange={(e) => setTodoId(e.target.value)}
+                        />
+                        <button onClick={handleClick}>Enter</button>
+                    </div>
                 </div>
 
                 <div className='with-name'>
-                <span className='search-text'>
-                    Search Todo with their name
-                </span>
+                    <span className='search-text'>
+                        Search Todo with their name
+                    </span>
 
-                <div className='search-row'>
-                    <input
-                    type="text"
-                    placeholder="Enter Todo"
-                    value={todo}
-                    onChange= {(e) => setTodo(e.target.value)}
-                    />
-                    <button onClick={hanldleClickTodoSearch}>Enter</button>
-                </div>
+                    <div className='search-row'>
+                        <input
+                            type="text"
+                            placeholder="Enter Todo"
+                            value={todo}
+                            onChange={(e) => setTodo(e.target.value)}
+                        />
+                        <button onClick={hanldleClickTodoSearch}>Enter</button>
+                    </div>
                 </div>
 
                 {error && <div className='alert error'>{error} !!</div>}

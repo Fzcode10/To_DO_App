@@ -153,15 +153,16 @@ exports.updateTodoById = async (req, res) => {
 // Find totdo with name or title
 
 exports.getSingleTodoByName = async (req, res) => {
-    const todoTitle = req.body.todo;
+    const name = req.body.name;
 
-    console.log(todoTitle);
+    console.log(name);
+    // console.log(req.body);
 
     try {
 
-        const todo = await TodoModel.findOne({name : todoTitle});
+        const todo = await TodoModel.findOne({name : name});
 
-        // console.log(todo);
+        console.log(todo);
 
         if (!todo) {
             throw Error("Check todo ones (Like space, uppercase and lowercase etc)");

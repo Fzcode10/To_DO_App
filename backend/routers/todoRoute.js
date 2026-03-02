@@ -27,7 +27,7 @@ router.post('/addnew', addNewTodo);
 
 router.patch('/:id', updateTodoById);
 
-router.post('/singletodo', getSingleTodoByName);
+router.post('/singletodo/byname', getSingleTodoByName);
 
 
 module.exports = router;
