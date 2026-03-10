@@ -1,36 +1,35 @@
-
-/* Main container */
+/* Main container - Split into two columns */
 .container-home {
   min-height: 100vh;              
   display: flex;
-  flex-direction: column;         
+  flex-direction: row; /* Horizontal split */
   background-color: #f7f7f7;
-  padding: 16px;
+  padding: 24px;
   box-sizing: border-box;
+  gap: 24px; /* Space between list and form */
 }
 
-/* Todo list section */
+/* Todo list section - Left Side (Flexible) */
 .todo-part {
-  flex: 1;                       
+  flex: 2; 
   overflow-y: auto;               
-  padding-bottom: 80px;           
+  padding-bottom: 20px;           
 }
 
-/* New todo form section */
+/* New todo form section - Right Side (Sidebar) */
 .newform-part {
-  position: sticky;               
-  bottom: 0;
+  flex: 1;
+  height: fit-content;
+  position: sticky; 
+  top: 20px;
   background-color: #ffffff;
-  padding: 16px;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
-  border-top: 1px solid #ddd;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
 }
-
-
-
 
 /* Navbar Part css */
-
 header {
   width: 100%;
   height: 64px;
@@ -40,23 +39,19 @@ header {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Inner container */
 header .container {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   padding: 0 16px;
-
   display: flex;
   align-items: center;
 }
 
-/* Link reset */
 header .container a {
   text-decoration: none;
 }
 
-/* Title */
 header h1 {
   font-size: 20px;
   font-weight: 600;
@@ -66,16 +61,11 @@ header h1 {
   white-space: nowrap;
 }
 
-/* Hover effect */
 header h1:hover {
   opacity: 0.85;
 }
 
-
-
-/* todo List Css  */
-
-/* Todo container */
+/* todo List Css */
 .todo-continer {
   background-color: #ffffff;
   padding: 14px 16px;
@@ -84,7 +74,6 @@ header h1:hover {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-/* Checkbox + status text */
 .todo-continer label {
   display: flex;
   align-items: center;
@@ -96,14 +85,12 @@ header h1:hover {
   margin-bottom: 8px;
 }
 
-/* Checkbox styling */
 .todo-continer input[type="checkbox"] {
   width: 16px;
   height: 16px;
   cursor: pointer;
 }
 
-/* Todo name */
 .todo-continer p {
   margin: 6px 0 12px;
   font-size: 16px;
@@ -111,7 +98,6 @@ header h1:hover {
   line-height: 1.4;
 }
 
-/* Buttons base */
 .todo-continer button {
   padding: 6px 14px;
   font-size: 14px;
@@ -122,7 +108,6 @@ header h1:hover {
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-/* Edit button */
 .edit-button {
   background-color: #2563eb;
   color: #ffffff;
@@ -132,7 +117,6 @@ header h1:hover {
   background-color: #1d4ed8;
 }
 
-/* Delete button */
 .delete-button {
   background-color: #dc2626;
   color: #ffffff;
@@ -142,45 +126,30 @@ header h1:hover {
   background-color: #b91c1c;
 }
 
-/* Button click effect */
 .todo-continer button:active {
   transform: scale(0.96);
 }
 
-/* Divider */
 .todo-continer hr {
   margin-top: 14px;
   border: none;
   border-top: 1px solid #e5e7eb;
 }
 
-
-/* new Todo Add */
-
+/* New Todo Add - Adjusted for Sidebar */
 .addnew-todo {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 14px 20px;
-  background-color: #ffffff;
-  border-top: 1px solid #e5e5e5;
-
   display: flex;
-  align-items: flex-end;
-  gap: 12px;
-  box-sizing: border-box;
+  flex-direction: column; /* Stack vertically for sidebar */
+  gap: 16px;
 }
 
-/* Left side: span + input layered */
 .addnew-todo span {
-  display: inline-block;
+  display: block;
   font-size: 13px;
   color: #666;
   margin-bottom: 4px;
 }
 
-/* Input field */
 .addnew-todo input {
   width: 100%;
   padding: 10px 12px;
@@ -188,22 +157,21 @@ header h1:hover {
   border: 1px solid #ccc;
   border-radius: 6px;
   outline: none;
+  box-sizing: border-box;
 }
 
-/* Button aligned with input */
 .addnew-todo button {
+  width: 100%; /* Full width button in sidebar */
   height: 42px;
-  padding: 0 18px;
   background-color: #4f46e5;
   color: #ffffff;
   border: none;
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
-  white-space: nowrap;
 }
 
-/* View mode text */
+/* View/Edit modes */
 .todoName {
   font-size: 20px;
   font-weight: 500;
@@ -211,34 +179,29 @@ header h1:hover {
   margin: 0;
 }
 
-/* Edit container */
 .edit-tooldiv {
-  width: 50%;
+  width: 100%;
 }
 
-/* Keep input + button aligned */
 .edit-label {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-/* Edit input */
 .edit-input {
   font-size: 15px;    
   padding: 6px 10px;
-  width: 50%;
+  flex: 1;
   border: 1px solid #ccc;
   border-radius: 6px;
   outline: none;
 }
 
-/* Focus effect */
 .edit-input:focus {
   border-color: #4f46e5;
 }
 
-/* Done button */
 .done-btn {
   font-size: 16px;
   padding: 6px 14px;
@@ -249,11 +212,7 @@ header h1:hover {
   color: white;
 }
 
-.done-btn:hover {
-  opacity: 0.9;
-}
-
-/* Base alert style */
+/* Feedback & Alerts */
 .alert {
   padding: 8px 12px;
   border-radius: 6px;
@@ -262,29 +221,20 @@ header h1:hover {
   margin-top: 8px;
 }
 
-/* Error message */
 .alert.error {
   background-color: #fdecea;
   color: #b02a37;
   border-left: 4px solid #dc3545;
 }
 
-/* Success message */
 .alert.success {
   background-color: #e6f9f0;
   color: #1e7e34;
   border-left: 4px solid #28a745;
 }
 
-/* Input error state */
-input.alert.error {
-  border: 1px solid #dc3545;
-  background-color: #fff5f5;
-}
-
-
-.loading,
-.fullpageerror {
+/* Loading & Full Page States */
+.loading, .fullpageerror {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -293,39 +243,21 @@ input.alert.error {
   text-align: center;
 }
 
-/* Loading Page */
-.loading {
-  background-color: #f8f9fa;
-}
-
+.loading { background-color: #f8f9fa; }
 .loading h1 {
   font-size: 28px;
-  font-weight: 600;
   color: #4a90e2;
   animation: pulse 1.2s infinite;
 }
 
-/* Full Page Error */
-.fullpageerror {
-  background-color: #fff5f5;
-}
-
-.fullpageerror h1 {
-  font-size: 26px;
-  font-weight: 600;
-  color: #dc3545;
-}
-
-/* Loading animation */
 @keyframes pulse {
   0% { opacity: 0.5; }
   50% { opacity: 1; }
   100% { opacity: 0.5; }
 }
 
-
-.edited,.taskDone,
-.deleted, .taskDoneUndo {
+/* Toasts */
+.edited, .taskDone, .deleted, .taskDoneUndo {
   position: fixed;
   top: 20px;
   right: 20px;
@@ -334,37 +266,19 @@ input.alert.error {
   border-radius: 8px;
   color: white;
   font-weight: 500;
-  font-size: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 9999;
   animation: slideIn 0.3s ease forwards;
 }
 
-/* Green for edited */
-.edited, .taskDone {
-  background-color: #2ecc71;
-}
+.edited, .taskDone { background-color: #2ecc71; }
+.deleted, .taskDoneUndo { background-color: #e74c3c; }
 
-/* Red for deleted */
-.deleted, .taskDoneUndo {
-  background-color: #e74c3c;
-}
-
-
-
-/* Slide animation */
 @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-/* Main search container */
+/* Search bar */
 .searchbar {
   width: 100%;
   max-width: 700px;
@@ -376,47 +290,20 @@ input.alert.error {
   display: flex;
   flex-direction: column;
   gap: 25px;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Sections */
-.with-id,
-.with-name {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* Search description text */
-.search-text {
-  font-size: 14px;
-  color: #444;
-}
-
-/* Row layout for input + button */
-.search-row,
-.with-name .searchbar {
+.search-row {
   display: flex;
   gap: 10px;
 }
 
-/* Input styling */
 .searchbar input {
   flex: 1;
   padding: 10px 14px;
   border: 1px solid #dcdcdc;
   border-radius: 8px;
-  font-size: 14px;
-  outline: none;
-  transition: all 0.2s ease-in-out;
 }
 
-.searchbar input:focus {
-  border-color: #4a90e2;
-  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.15);
-}
-
-/* Button styling */
 .searchbar button {
   padding: 10px 18px;
   background-color: #4a90e2;
@@ -424,18 +311,4 @@ input.alert.error {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s ease-in-out;
-}
-
-.searchbar button:hover {
-  background-color: #357abd;
-}
-
-.searchbar button:active {
-  transform: scale(0.97);
-}
-
-.search-row button:hover {
-  background-color: #357abd;
 }
